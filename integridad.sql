@@ -27,14 +27,19 @@ create trigger pkcursos on Cursos for insert as
 if( (select id_curso from inserted) in (null))
     begin
         ROLLBACK TRANSACTION
-        print "La clave no puede ser nula""
+        print "La clave no puede ser nula"
     end
  
 declare @clave varchar(5)
+declare @curso
 select @clave =  id_curso from inserted
 declare @veces int
 select @veces = count(*) from Cursos where Cursos.id_curso=@clave
- 
+if(@curso not like "CUR[0-9][0-9]")
+	    begin
+		print "Identificador incorrecto"
+		ROLLBACK TRANSACTION
+	end
 if ( @veces > 1)
     begin
         print "La clave ya existe"
