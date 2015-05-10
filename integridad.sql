@@ -21,7 +21,7 @@ if ( @veces > 1)
 go
 
 
-------2do trigger
+--2do trigger
 
 create trigger pkcursos on Cursos for insert as
 if( (select id_curso from inserted) in (null))
