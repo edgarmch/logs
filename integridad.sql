@@ -2,7 +2,7 @@ create trigger pkusuario on Usuarios for insert as
 if( (select id_usuario from inserted) in (null))
     begin
         ROLLBACK TRANSACTION
-        print "Debe de agregar un usuario"
+        print "Debe agregar un identificador válido"
     end
 declare @usuario int
 select @usuario =  id_usuario from inserted
